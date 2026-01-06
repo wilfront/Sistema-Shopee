@@ -24,7 +24,7 @@ export default function BipadosTab({ data }) {
         🔲 Visualização Completa das Gaiolas
       </h2>
 
-      <div className="overflow-auto border border-gray-300 rounded-lg max-h-[400px] sm:max-h-[700px]">"
+      <div className="overflow-auto border border-gray-300 rounded-lg max-h-[400px] sm:max-h-[700px]">
         <table className="w-full border-collapse">
           <thead className="bg-gray-100 sticky top-0 z-10">
             <tr>
