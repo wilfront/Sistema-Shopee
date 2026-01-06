@@ -1,0 +1,64 @@
+{
+  "bipados": {
+    "1": [
+      "dsad",
+      "dasda",
+      "dasd",
+      "dsadsa",
+      "dsadsa",
+      "dasda",
+      "dasdas",
+      "dsds"
+    ],
+    "6": [
+      "dasdasd"
+    ]
+  },
+  "estoque": [
+    {
+      "timestamp": "06/01/2026, 15:19:31",
+      "codigo": "dsad",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 15:19:32",
+      "codigo": "dasda",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 15:19:32",
+      "codigo": "dasd",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 15:27:55",
+      "codigo": "dsadsa",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 15:27:56",
+      "codigo": "dsadsa",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 15:27:57",
+      "codigo": "dasda",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 16:29:01",
+      "codigo": "dasdas",
+      "gaiola": 1
+    },
+    {
+      "timestamp": "06/01/2026, 16:29:05",
+      "codigo": "dasdasd",
+      "gaiola": 6
+    },
+    {
+      "timestamp": "06/01/2026, 16:41:53",
+      "codigo": "dsds",
+      "gaiola": 1
+    }
+  ]
+}
