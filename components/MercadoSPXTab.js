@@ -12,6 +12,7 @@ export default function MercadoSPXTab({ isAdmin }) {
     gaiola: ''
   })
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
 
   const TOTAL_VAGAS = 20
 
@@ -19,12 +20,15 @@ export default function MercadoSPXTab({ isAdmin }) {
     loadVagas()
     
     // Auto-refresh a cada 2 segundos para sincronizar status
+    // Mas não recarrega se estiver salvando
     const interval = setInterval(() => {
-      loadVagas()
+      if (!saving) {
+        loadVagas()
+      }
     }, 2000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [saving])
 
   const loadVagas = async () => {
     try {
@@ -41,6 +45,9 @@ export default function MercadoSPXTab({ isAdmin }) {
   }
 
   const saveVagas = async (newVagas) => {
+    if (saving) return false // Previne múltiplas chamadas simultâneas
+    
+    setSaving(true)
     try {
       const response = await fetch('/api/mercadospx', {
         method: 'POST',
@@ -56,6 +63,8 @@ export default function MercadoSPXTab({ isAdmin }) {
     } catch (error) {
       console.error('Erro ao salvar vagas:', error)
       return false
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -162,11 +171,16 @@ export default function MercadoSPXTab({ isAdmin }) {
   }
 
   const handleRemoveVeiculo = async (vagaNumber) => {
+    if (saving) return // Previne cliques durante salvamento
     if (!confirm(`Remover configuração da Bancada ${vagaNumber}?`)) return
 
     const newVagas = { ...vagas }
     delete newVagas[vagaNumber]
-    await saveVagas(newVagas)
+    
+    const success = await saveVagas(newVagas)
+    if (!success) {
+      alert('Erro ao remover bancada. Tente novamente.')
+    }
   }
 
   const handleEditVaga = (vagaNumber, mode = 'nome') => {
@@ -412,7 +426,13 @@ export default function MercadoSPXTab({ isAdmin }) {
                         </button>
                         <button
                           onClick={() => handleRemoveVeiculo(vagaNumber)}
-                          className="px-2 py-1 bg-red-500 text-white text-xs rounded hover:bg-red-600"
+                          disabled={saving}
+                          className={`px-2 py-1 text-white text-xs rounded transition-colors ${
+                            saving 
+                              ? 'bg-gray-400 cursor-not-allowed' 
+                              : 'bg-red-500 hover:bg-red-600'
+                          }`}
+                          title={saving ? 'Salvando...' : 'Remover bancada'}
                         >
                           <Trash2 className="w-3 h-3" />
                         </button>

@@ -56,7 +56,8 @@ async function saveMercadoSPXData(data) {
   if (isVercel) {
     try {
       const docRef = doc(db, COLLECTION_NAME, DOC_ID)
-      await setDoc(docRef, data, { merge: true })
+      // Não usar merge para garantir que exclusões sejam persistidas
+      await setDoc(docRef, data)
       return true
     } catch (error) {
       console.error('Erro ao salvar dados no Firestore:', error)
